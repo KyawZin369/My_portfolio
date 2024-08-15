@@ -14,11 +14,10 @@ export default function Navigation() {
 
   return (
     <VStack
-      divider={<StackDivider borderColor="gray.200" />}
-      spacing={4}
+      divider={<StackDivider/>}
       align="stretch"
     >
-      <Box h="80px" bg="#BFF6C3" className="flex justify-between">
+      <Box h="80px" bg="blue.200" className="flex justify-between">
         <Box className="flex items-center pl-10 py-4">
           <Image
             src="../../public/lounge-photography-portfolio-for-job-application.svg"
@@ -32,7 +31,7 @@ export default function Navigation() {
           >
             <Text
               as="span"
-              color="#40534C"
+              color="#1A4870"
               className="Pacifico-Font font-semibold"
             >
               {"<>"}
@@ -42,7 +41,7 @@ export default function Navigation() {
             </Text>
             <Text
               as="span"
-              color="#40534C"
+              color="#1A4870"
               className="Pacifico-Font font-semibold"
             >
               {"</>"}
@@ -67,7 +66,7 @@ export default function Navigation() {
                   }}
                   transition="color 0.3s ease-in-out"
                   fontWeight="700"
-                  color="#006769"
+                  color="#1A4870"
                 >
                   {item}
                 </Text>
