@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75,300..700&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Special+Elite&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75,300..700&family=Pacifico&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75,300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Special+Elite&display=swap');
 
 
 .Pacifico-Font {
@@ -14,3 +13,8 @@
     font-style: normal;
   }
   
+  .inter {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
