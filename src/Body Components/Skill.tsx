@@ -1,4 +1,14 @@
-import { Box, Flex, List, ListItem, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  List,
+  ListItem,
+  Progress,
+  Stack,
+  Text,
+  keyframes,
+  usePrefersReducedMotion,
+} from "@chakra-ui/react";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { DiJavascript } from "react-icons/di";
@@ -23,31 +33,31 @@ import {
   SiEclipseide,
   SiMongodb,
   SiPrisma,
-  SiTypescript
+  SiTypescript,
 } from "react-icons/si";
-import "../assets/style/fonts.css"
+import "../assets/style/fonts.css";
 
 export default function Skill() {
-  interface tech {
+  interface Tech {
     category: string;
     items: string[];
     Logo: JSX.Element[];
-    progress : number[];
+    progress: number[];
   }
 
-  const techStack: tech[] = [
+  const techStack: Tech[] = [
     {
       category: "languages",
       items: ["Java", "HTML", "CSS", "Javascript", "Node.js", "Typescript"],
       Logo: [
-        <FaJava key="java" className="text-3xl"/>,
-        <FaHtml5 key="html" className="text-3xl text-[#DD4B25]"/>,
-        <FaCss3Alt key="css" className="text-3xl text-[#2D53E5]"/>,
-        <DiJavascript key="Javascript" className="text-3xl text-[#D0AB13]"/>,
-        <FaNodeJs key="node" className="text-3xl text-green-700"/>,
-        <SiTypescript key="typescript" className="text-3xl text-blue-600" />
+        <FaJava key="java" className="text-3xl" />,
+        <FaHtml5 key="html" className="text-3xl text-[#DD4B25]" />,
+        <FaCss3Alt key="css" className="text-3xl text-[#2D53E5]" />,
+        <DiJavascript key="Javascript" className="text-3xl text-[#D0AB13]" />,
+        <FaNodeJs key="node" className="text-3xl text-green-700" />,
+        <SiTypescript key="typescript" className="text-3xl text-blue-600" />,
       ],
-      progress: [10,20,30,40,50]
+      progress: [50, 85, 80, 75, 70, 80],
     },
     {
       category: "frameworks",
@@ -57,63 +67,66 @@ export default function Skill() {
         "Bootstrap",
         "TailwindCSS",
         "Express",
-        "NextJs",
+        "Nextjs",
       ],
       Logo: [
-        <FaReact key="react" className="text-3xl text-blue-500"/>,
-        <SiRedux key="redux" className="text-3xl text-[#7B50BD]"/>,
-        <FaBootstrap key="bootstrap" className="text-3xl text-[#8D1AFB]"/>,
-        <SiTailwindcss key="tailwindcss" className="text-3xl text-blue-500"/>,
-        <SiExpress key="express" className="text-3xl text-black"/>,
-        <SiNextdotjs key="nextjs" className="text-3xl text-black"/>,
+        <FaReact key="react" className="text-3xl text-blue-500" />,
+        <SiRedux key="redux" className="text-3xl text-[#7B50BD]" />,
+        <FaBootstrap key="bootstrap" className="text-3xl text-[#8D1AFB]" />,
+        <SiTailwindcss key="tailwindcss" className="text-3xl text-blue-500" />,
+        <SiExpress key="express" className="text-3xl text-black" />,
+        <SiNextdotjs key="nextjs" className="text-3xl text-black" />,
       ],
-      progress: [10,20,30,40,50]
+      progress: [86, 65, 85, 76, 80, 60],
     },
     {
       category: "databases",
       items: ["MYSQL", "MongoDB", "Prisma"],
       Logo: [
-        <SiMysql key="mysql" className="text-3xl"/>,
-        <SiMongodb key="mongodb" className="text-3xl text-green-500"/>,
-        <SiPrisma key="prisma" className="text-3xl text-[#143A51]"/>,
+        <SiMysql key="mysql" className="text-3xl" />,
+        <SiMongodb key="mongodb" className="text-3xl text-green-500" />,
+        <SiPrisma key="prisma" className="text-3xl text-[#143A51]" />,
       ],
-      progress: [10,20,30,40,50]
+      progress: [70, 80, 60],
     },
     {
       category: "tools",
-      items: [
-        "VS Code",
-        "Git",
-        "Github",
-        "Netlify",
-        "Eclipse",
-      ],
+      items: ["VS Code", "Git", "Github", "Netlify", "Eclipse"],
       Logo: [
-        <SiVisualstudiocode key="vscode" className="text-3xl text-blue-600"/>,
-        <BsGit key="git" className="text-3xl text-[#F05539]"/>,
-        <FaGithub key="github" className="text-3xl text-black"/>,
-        <BiLogoNetlify key="netlify" className="text-3xl text-[#37B7BC]"/>,
-        <SiEclipseide key="eclipse" className="text-3xl text-[#31255B]"/>,
+        <SiVisualstudiocode key="vscode" className="text-3xl text-blue-600" />,
+        <BsGit key="git" className="text-3xl text-[#F05539]" />,
+        <FaGithub key="github" className="text-3xl text-black" />,
+        <BiLogoNetlify key="netlify" className="text-3xl text-[#37B7BC]" />,
+        <SiEclipseide key="eclipse" className="text-3xl text-[#31255B]" />,
       ],
-      progress: [10,20,30,40,50]
+      progress: [80, 85, 85, 50, 40],
     },
   ];
 
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  // Corrected function to return keyframes using the actual progress value
+  const processAni = (progressValue: number) => {
+    return isInView && keyframes`
+      from { width: 0%; }
+      to { width: ${progressValue}%; }
+    `;
+  };
+
   const animationProps = {
-    transform: isInView ? "translateY(0)" : "translateY(100px)",
+    transform: isInView ? "translateY(0)" : "translateY(200px)",
     opacity: isInView ? 1 : 0,
     transition: "all 2s ease-in-out",
   };
 
   return (
     <Stack
-      ref={ref}
       align="stretch"
       width="100%"
-      height="120vh"
+      height="150vh"
       bgGradient="linear(to-b, blue.200, blue.100, blue.100)"
     >
       <Box>
@@ -129,7 +142,7 @@ export default function Skill() {
       </Box>
       <Box
         margin="10px"
-        height="90vh"
+        height="120vh"
         display="flex"
         justifyContent="space-around"
       >
@@ -156,20 +169,40 @@ export default function Skill() {
             >
               {tech.category.charAt(0).toUpperCase() + tech.category.slice(1)}
             </Box>
-            <List width="100%">
+            <List width="100%" ref={ref}>
               {tech.items.map((lang, id) => (
                 <ListItem
                   key={lang}
                   marginTop="20px"
                   className="font-sans font-bold text-xl p-4"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="space-between"
                   style={animationProps}
                 >
-                  <Text>{tech.Logo[id]}</Text>
-                  {lang}
-                  <Text>{tech.Logo[id]}</Text>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    marginBottom="10px"
+                  >
+                    <Text>{tech.Logo[id]}</Text>
+                    {lang}
+                    <Text>{tech.Logo[id]}</Text>
+                  </Box>
+                  <Box>
+                    <Progress
+                      value={tech.progress[id]}
+                      size="sm"
+                      borderRadius="20px"
+                      colorScheme="green"
+                      sx={{
+                        "& div:first-of-type": {
+                          animation: prefersReducedMotion
+                            ? undefined
+                            : `${processAni(tech.progress[id])} 2s ease-in-out`,
+                          width: `${tech.progress[id]}%`,
+                        },
+                      }}
+                    />
+                  </Box>
                 </ListItem>
               ))}
             </List>

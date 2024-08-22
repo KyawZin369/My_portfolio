@@ -1,8 +1,8 @@
 import "../assets/style/fonts.css";
 import { useRef } from "react";
 import { animated, useSpring, useScroll } from "@react-spring/web";
-import Skill from "./Skill";
 import { Box, Stack } from "@chakra-ui/react";
+import Education from "./Education";
 
 export default function Main() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -28,11 +28,11 @@ export default function Main() {
             style={{
               ...springProps,
               position: "absolute",
-              top: "0px",
+              top: "200px",
               width: "100%",
             }}
           >
-            <Skill />
+            <Education/>
           </animated.div>
         </Box>
       </div>
